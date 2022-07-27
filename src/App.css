@@ -1,4 +1,172 @@
-.App {
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  margin: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 0.12);
+  background-image: linear-gradient(to bottom, #ececec -32%, #fff 124%);
+}
+
+.header-logo {
+  height: auto;
+  object-fit: contain;
+  font-family: Baskerville;
+  font-size: 28px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #3b3b3b;
+}
+
+.page-selector {
+  justify-content: center;
+  display: flex;
+  margin: 45px 0 60px 0;
+}
+
+.page-selector a {
+  text-decoration: none;
+  width: 90px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 4px;
+  border: 1px solid #d6d6d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+  text-align: center;
+  color: #606060;
+}
+
+.page-selector a.selected {
+  border: 1px solid #1797ff;
+  color: #1797ff;
+}
+
+.select-box {
+  position: relative;
+  display: block;
+  justify-content: flex-start;
+  width: 250px;
+  font-size: 16px;
+  color: #606060;
+}
+
+.select-box__current {
+  position: relative;
+  box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #d6d6d6;
+}
+
+.select-box__current:focus {
+  border: 1px solid #000;
+}
+
+.select-box__current:focus + .select-box__list {
+  opacity: 1;
+  animation-name: none;
+
+}
+
+.select-box__current:focus + .select-box__list .select-box__option {
+  cursor: pointer;
+}
+
+.select-box__current:focus + .select-box__list .select-box__option:hover {
+  background-color: #d6d6d6;
+}
+
+.select-box__current:focus .select-box__icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-box__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 15px;
+  opacity: 0.3;
+  transition: 0.2s ease;
+}
+
+.select-box__value {
+  display: flex;
+}
+
+.select-box__input {
+  display: none;
+}
+
+.select-box__input:checked + .select-box__input-text {
+  display: block;
+}
+
+.select-box__input-text {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 5px 10px;
+  background-color: #fff;
+}
+
+.select-box__list {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  margin-top: 1px;
+  opacity: 0;
+  animation-name: HideList;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: step-start;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.select-box__option {
+  padding: 15px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 0%;
+}
+
+.select-box:hover,
+.select-box:focus {
+  color: #546c84;
+  background-color: #fbfbfb;
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +203,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
