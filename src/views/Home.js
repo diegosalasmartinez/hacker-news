@@ -7,7 +7,8 @@ import JobPagination from '../components/JobPagination'
 const techs = ['angular', 'reactjs', 'vuejs']
 
 const Home = () => {
-  const [techSelected, setTechSelected] = useState(-1)
+  const techStored = localStorage.getItem('tech')
+  const [techSelected, setTechSelected] = useState(techStored ? parseInt(techStored) : -1)
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(0)
   const [data, setData] = useState([])
@@ -38,6 +39,7 @@ const Home = () => {
   }, [techSelected, page])
 
   const onChangeTech = tech => {
+    localStorage.setItem('tech', tech)
     setTechSelected(tech)
   }
 

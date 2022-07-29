@@ -183,6 +183,11 @@
   display: flex;
 }
 
+.job:hover {
+  opacity: 0.50;
+  cursor: pointer;
+}
+
 .job-info {
   border-left-width: 2px;
   border-top-width: 2px;

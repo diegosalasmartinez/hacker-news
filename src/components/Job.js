@@ -8,8 +8,12 @@ const Job = props => {
   const { job } = props
   const timeAgo = time_ago(job.created_at)
 
+  const onSeeJob = () => {
+    window.open(job.story_url,'_blank')
+  }
+
   return (
-    <div className="job">
+    <div className="job" onClick={onSeeJob}>
       <div className="job-info">
         <div className="job-detail">
           <img src={time} alt="Time" height="15px" width="auto" />
