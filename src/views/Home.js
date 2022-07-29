@@ -3,6 +3,7 @@ import axios from 'axios'
 import NewTechnologies from '../components/NewTechnologies'
 import Job from '../components/Job'
 import JobPagination from '../components/JobPagination'
+import Loader from '../components/Loader'
 
 const techs = ['angular', 'reactjs', 'vuejs']
 
@@ -67,7 +68,7 @@ const Home = () => {
           onChangeTech={onChangeTech}
         />
         {loading ? (
-          <div>Loading...</div>
+          <Loader />
         ) : (
           <div>
             <div className="job-container">

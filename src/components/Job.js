@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import favorite from '../assets/favorite.svg'
 import my_favorite from '../assets/my-favorite.svg'
 import time from '../assets/time.svg'
@@ -64,8 +64,14 @@ const Job = props => {
   )
 }
 
-Job.proptypes = {
-  job: PropTypes.object.isRequired
+Job.propTypes = {
+  job: PropTypes.shape({
+    objectID: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    story_title: PropTypes.string.isRequired,
+    story_url: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired
+  })
 }
 
 export default Job

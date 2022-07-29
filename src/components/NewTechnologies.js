@@ -96,7 +96,7 @@ const NewTechnologies = (props) => {
   )
 }
 
-NewTechnologies.proptypes = {
+NewTechnologies.propTypes = {
   techSelected: PropTypes.number.isRequired,
   onChangeTech: PropTypes.func.isRequired
 }

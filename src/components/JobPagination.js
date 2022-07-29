@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const JobPagination = props => {
@@ -105,6 +106,11 @@ const JobPagination = props => {
       </ul>
     </div>
   )
+}
+
+JobPagination.propTypes ={
+  page: PropTypes.number.isRequired,
+  numberPages: PropTypes.number.isRequired
 }
 
 export default JobPagination
