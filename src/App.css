@@ -179,8 +179,20 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media only screen and (max-width: 1025px) {
+  .job-container {
+    display: block;
+  }
+}
+
 .job {
   display: flex;
+}
+
+@media only screen and (max-width: 1025px) {
+  .job {
+    margin-bottom: 30px;
+  }
 }
 
 .job:hover {
@@ -247,7 +259,6 @@ ul.page {
   height: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
-  border-radius: 10px;
   background: #ffffff;
 }
 
@@ -259,6 +270,14 @@ ul.page {
   align-items: center;
   margin: 5px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1025px) {
+  .page__numbers,
+  .page__btn,
+  .page__dots {
+    margin: 2px;
+  }
 }
 
 .page__dots {
@@ -307,6 +326,7 @@ ul.page {
 .lds-roller {
   display: flex;
   margin: 0 auto;
+  padding-top: 10px;
   position: relative;
   width: 80px;
   height: 80px;
