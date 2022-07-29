@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import NewTechnologies from '../components/NewTechnologies'
 import Job from '../components/Job'
+import JobPagination from '../components/JobPagination'
 
 const techs = ['angular', 'reactjs', 'vuejs']
 
@@ -18,13 +19,15 @@ const Home = () => {
       const response = await axios.get(
         `https://hn.algolia.com/api/v1/search_by_date?query=${tech}&page=${page}`
       )
-      const data = response.data.hits.filter(d => d.author && d.story_title && d.story_url && d.created_at).map(d => ({
-        objectID: d.objectID,
-        author: d.author,
-        story_title: d.story_title,
-        story_url: d.story_url,
-        created_at: d.created_at
-      }))
+      const data = response.data.hits
+        .filter(d => d.author && d.story_title && d.story_url && d.created_at)
+        .map(d => ({
+          objectID: d.objectID,
+          author: d.author,
+          story_title: d.story_title,
+          story_url: d.story_url,
+          created_at: d.created_at
+        }))
       setLoading(false)
       setData(data)
     }
@@ -32,10 +35,26 @@ const Home = () => {
     if (techSelected >= 0) {
       fetchData().catch(console.error)
     }
-  }, [techSelected])
+  }, [techSelected, page])
 
   const onChangeTech = tech => {
     setTechSelected(tech)
+  }
+
+  const onChangePage = number => {
+    setPage(number - 1)
+  }
+
+  const onPrevPage = () => {
+    if (page > 0) {
+      setPage(prev => prev - 1)
+    }
+  }
+
+  const onNextPage = () => {
+    if (page < 49) {
+      setPage(prev => prev + 1)
+    }
   }
 
   return (
@@ -48,10 +67,20 @@ const Home = () => {
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <div className="job-container">
-            {data.map(d => (
-              <Job key={d.objectID} job={d} />
-            ))}
+          <div>
+            <div className="job-container">
+              {data.map(d => (
+                <Job key={d.objectID} job={d} />
+              ))}
+            </div>
+            {techSelected >= 0 && (
+              <JobPagination
+                page={page}
+                onChangePage={onChangePage}
+                onPrevPage={onPrevPage}
+                onNextPage={onNextPage}
+              />
+            )}
           </div>
         )}
       </div>
