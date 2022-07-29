@@ -1,34 +1,44 @@
 import React from 'react'
 
 const JobPagination = props => {
-  const { page, count } = props
+  const { page, numberPages = 50 } = props
 
   const generatePageNumber = () => {
     const pages = []
-    if (page < 4) {
+    if (numberPages < 7) {
+      for (let i = 0; i < numberPages; i++) {
+        pages.push(generatePageItem(i + 1))
+      }
+    } else if (page < 4) {
       pages.push(generatePageItem(1))
-      pages.push(generatePageItem(2))
-      pages.push(generatePageItem(3))
-      pages.push(generatePageItem(4))
-      pages.push(generatePageItem(5))
+      for (let i = 2; i < 6; i++) {
+        if (i < numberPages) {
+          pages.push(generatePageItem(i))
+        } else {
+          break
+        }
+      }
       pages.push(
         <li className="page__dots" key="dots-next">
           ...
         </li>
       )
-      pages.push(generatePageItem(50))
-    } else if (page >= (50 - 4)) {
+      pages.push(generatePageItem(numberPages))
+    } else if (page >= numberPages - 4) {
       pages.push(generatePageItem(1))
       pages.push(
         <li className="page__dots" key="dots-prev">
           ...
         </li>
       )
-      pages.push(generatePageItem(46))
-      pages.push(generatePageItem(47))
-      pages.push(generatePageItem(48))
-      pages.push(generatePageItem(49))
-      pages.push(generatePageItem(50))
+      for (let i = numberPages - 4; i < numberPages; i++) {
+        if (i < numberPages) {
+          pages.push(generatePageItem(i))
+        } else {
+          break
+        }
+      }
+      pages.push(generatePageItem(numberPages))
     } else {
       pages.push(generatePageItem(1))
       pages.push(
@@ -45,7 +55,7 @@ const JobPagination = props => {
           ...
         </li>
       )
-      pages.push(generatePageItem(50))
+      pages.push(generatePageItem(numberPages))
     }
     return pages
   }
@@ -62,14 +72,34 @@ const JobPagination = props => {
     )
   }
 
+  const onPrevPage = () => {
+    if (page > 0) {
+      props.onPrevPage()
+    }
+  }
+
+  const onNextPage = () => {
+    if (page < numberPages - 1) {
+      props.onNextPage()
+    }
+  }
+
   return (
     <div className="container">
       <ul className="page">
-        <li className={`page__btn ${page === 0 ? 'disabled' : ''}`} key="prev" onClick={() => props.onPrevPage()}>
+        <li
+          className={`page__btn ${page === 0 ? 'disabled' : ''}`}
+          key="prev"
+          onClick={onPrevPage}
+        >
           {'<'}
         </li>
         {generatePageNumber()}
-        <li className={`page__btn ${page === 49 ? 'disabled' : ''}`} key="next" onClick={() => props.onNextPage()}>
+        <li
+          className={`page__btn ${page === numberPages - 1 ? 'disabled' : ''}`}
+          key="next"
+          onClick={onNextPage}
+        >
           {'>'}
         </li>
       </ul>

@@ -34,7 +34,7 @@ const Job = props => {
 
   const onUnfavJov = () => {
     const favJobs = JSON.parse(localStorage.getItem('favJobs')) || []
-    const index = favJobs.indexOf(j => j.objectID === job.objectID)
+    const index = favJobs.findIndex(j => j.objectID === job.objectID)
     if (index > -1) {
       favJobs.splice(index, 1)
     }

@@ -8,10 +8,13 @@ const techs = ['angular', 'reactjs', 'vuejs']
 
 const Home = () => {
   const techStored = localStorage.getItem('tech')
-  const [techSelected, setTechSelected] = useState(techStored ? parseInt(techStored) : -1)
+  const [techSelected, setTechSelected] = useState(
+    techStored ? parseInt(techStored) : -1
+  )
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(0)
   const [data, setData] = useState([])
+  const [numberPages, setNumberPages] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,8 +32,9 @@ const Home = () => {
           story_url: d.story_url,
           created_at: d.created_at
         }))
-      setLoading(false)
       setData(data)
+      setNumberPages(response.data.nbPages)
+      setLoading(false)
     }
 
     if (techSelected >= 0) {
@@ -48,15 +52,11 @@ const Home = () => {
   }
 
   const onPrevPage = () => {
-    if (page > 0) {
-      setPage(prev => prev - 1)
-    }
+    setPage(prev => prev - 1)
   }
 
   const onNextPage = () => {
-    if (page < 49) {
-      setPage(prev => prev + 1)
-    }
+    setPage(prev => prev + 1)
   }
 
   return (
@@ -78,6 +78,7 @@ const Home = () => {
             {techSelected >= 0 && (
               <JobPagination
                 page={page}
+                numberPages={numberPages}
                 onChangePage={onChangePage}
                 onPrevPage={onPrevPage}
                 onNextPage={onNextPage}
