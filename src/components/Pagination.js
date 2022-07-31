@@ -90,25 +90,23 @@ const Pagination = props => {
   }
 
   return (
-    <div className="container">
-      <ul className="page">
-        <li
-          className={`page__btn ${page === 0 ? 'disabled' : ''}`}
-          key="prev"
-          onClick={onPrevPage}
-        >
-          {'<'}
-        </li>
-        {generatePageNumber()}
-        <li
-          className={`page__btn ${page === numberPages - 1 ? 'disabled' : ''}`}
-          key="next"
-          onClick={onNextPage}
-        >
-          {'>'}
-        </li>
-      </ul>
-    </div>
+    <ul className="page">
+      <li
+        className={`page__btn ${page === 0 ? 'disabled' : ''}`}
+        key="prev"
+        onClick={onPrevPage}
+      >
+        {'<'}
+      </li>
+      {generatePageNumber()}
+      <li
+        className={`page__btn ${page === numberPages - 1 ? 'disabled' : ''}`}
+        key="next"
+        onClick={onNextPage}
+      >
+        {'>'}
+      </li>
+    </ul>
   )
 }
 
