@@ -5,10 +5,10 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container">
-        <span className="header-logo">
+        <div className="header-logo">
           <img src={hackerNews} alt="Logo" height="30px" width="240px" />
-          by Diego Salas
-        </span>
+          <span>by Diego Salas</span>
+        </div>
       </div>
     </div>
   )

@@ -35,6 +35,17 @@
   color: #3b3b3b;
 }
 
+@media only screen and (max-width: 1025px) {
+  .header-logo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-logo img {
+    margin-bottom: 10px;
+  }
+}
+
 /* Nav */
 
 .page-selector {
@@ -253,6 +264,7 @@
 
 ul.page {
   list-style-type: none;
+  padding: 0;
 }
 
 .page {
