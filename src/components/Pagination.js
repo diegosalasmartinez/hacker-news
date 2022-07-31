@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const JobPagination = props => {
+const Pagination = props => {
   const { page, numberPages = 50 } = props
 
   const generatePageNumber = () => {
     const pages = []
-    if (numberPages < 7) { // Few pages to display
+    if (numberPages < 7) {
+      // Few pages to display
       for (let i = 0; i < numberPages; i++) {
         pages.push(generatePageItem(i + 1))
       }
-    } else if (page < 4) { // Selected page in the beginning
+    } else if (page < 4) {
+      // Selected page in the beginning
       pages.push(generatePageItem(1))
       for (let i = 2; i < 6; i++) {
         if (i < numberPages) {
@@ -25,7 +27,8 @@ const JobPagination = props => {
         </li>
       )
       pages.push(generatePageItem(numberPages))
-    } else if (page >= numberPages - 4) { // Selected page in the end
+    } else if (page >= numberPages - 4) {
+      // Selected page in the end
       pages.push(generatePageItem(1))
       pages.push(
         <li className="page__dots" key="dots-prev">
@@ -40,7 +43,8 @@ const JobPagination = props => {
         }
       }
       pages.push(generatePageItem(numberPages))
-    } else { // Selected page in the middle
+    } else {
+      // Selected page in the middle
       pages.push(generatePageItem(1))
       pages.push(
         <li className="page__dots" key="dots-prev">
@@ -108,9 +112,11 @@ const JobPagination = props => {
   )
 }
 
-JobPagination.propTypes ={
+Pagination.propTypes = {
   page: PropTypes.number.isRequired,
-  numberPages: PropTypes.number.isRequired
+  numberPages: PropTypes.number.isRequired,
+  onPrevPage: PropTypes.func.isRequired,
+  onNextPage: PropTypes.func.isRequired
 }
 
-export default JobPagination
+export default Pagination

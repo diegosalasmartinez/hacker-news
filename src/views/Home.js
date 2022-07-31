@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import NewTechnologies from '../components/NewTechnologies'
 import Job from '../components/Job'
-import JobPagination from '../components/JobPagination'
+import Pagination from '../components/Pagination'
 import Loader from '../components/Loader'
 
 const techs = ['angular', 'reactjs', 'vuejs']
@@ -77,7 +77,7 @@ const Home = () => {
               ))}
             </div>
             {techSelected >= 0 && (
-              <JobPagination
+              <Pagination
                 page={page}
                 numberPages={numberPages}
                 onChangePage={onChangePage}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Job from '../components/Job'
-import JobPagination from '../components/JobPagination'
+import Pagination from '../components/Pagination'
 
 const Favs = () => {
   const favJobs = JSON.parse(localStorage.getItem('favJobs')) || []
@@ -38,7 +38,7 @@ const Favs = () => {
               <Job key={d.objectID} job={d} />
             ))}
           </div>
-          <JobPagination
+          <Pagination
             page={page}
             numberPages={numberPages}
             onChangePage={onChangePage}

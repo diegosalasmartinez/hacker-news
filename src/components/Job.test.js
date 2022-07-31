@@ -8,7 +8,7 @@ import {
   afterEach,
   describe
 } from '@jest/globals'
-import { fireEvent, prettyDOM, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import Job from './Job'
 
 describe('<Job />', () => {
@@ -43,8 +43,7 @@ describe('<Job />', () => {
     const x = jest.spyOn(window, 'open')
     x.mockImplementation(() => {})
 
-    const timeButton = component.container.querySelector('img')
-    const infoSection = timeButton.parentNode.parentNode
+    const infoSection = component.container.firstChild.firstChild
     fireEvent.click(infoSection)
 
     expect(window.open).toBeCalled()
