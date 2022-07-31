@@ -431,3 +431,10 @@ ul.page {
     transform: rotate(360deg);
   }
 }
+
+/* No favs */
+
+.no-favs {
+  display: flex;
+  justify-content: center;
+}
