@@ -6,11 +6,11 @@ const JobPagination = props => {
 
   const generatePageNumber = () => {
     const pages = []
-    if (numberPages < 7) {
+    if (numberPages < 7) { // Few pages to display
       for (let i = 0; i < numberPages; i++) {
         pages.push(generatePageItem(i + 1))
       }
-    } else if (page < 4) {
+    } else if (page < 4) { // Selected page in the beginning
       pages.push(generatePageItem(1))
       for (let i = 2; i < 6; i++) {
         if (i < numberPages) {
@@ -25,7 +25,7 @@ const JobPagination = props => {
         </li>
       )
       pages.push(generatePageItem(numberPages))
-    } else if (page >= numberPages - 4) {
+    } else if (page >= numberPages - 4) { // Selected page in the end
       pages.push(generatePageItem(1))
       pages.push(
         <li className="page__dots" key="dots-prev">
@@ -40,7 +40,7 @@ const JobPagination = props => {
         }
       }
       pages.push(generatePageItem(numberPages))
-    } else {
+    } else { // Selected page in the middle
       pages.push(generatePageItem(1))
       pages.push(
         <li className="page__dots" key="dots-prev">
