@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import favorite from '../assets/favorite.svg'
 import my_favorite from '../assets/my-favorite.svg'
 import time from '../assets/time.svg'
@@ -52,13 +53,15 @@ const Job = props => {
         <div className="job-title">{job.story_title}</div>
       </div>
       <div className="job-favorite">
-        <img
-          src={isFav ? my_favorite : favorite}
-          alt="Favorite"
-          height="25px"
-          width="auto"
-          onClick={onClickFav}
-        />
+        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+          <img
+            src={isFav ? my_favorite : favorite}
+            alt="Favorite"
+            height="25px"
+            width="auto"
+            onClick={onClickFav}
+          />
+        </motion.div>
       </div>
     </div>
   )

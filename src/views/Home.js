@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { AnimatePresence, motion } from 'framer-motion'
 import NewTechnologies from '../components/NewTechnologies'
 import Job from '../components/Job'
 import Pagination from '../components/Pagination'
@@ -63,30 +64,40 @@ const Home = () => {
   return (
     <div className="container">
       <div className="home">
-        <NewTechnologies
-          techSelected={techSelected}
-          onChangeTech={onChangeTech}
-        />
-        {loading ? (
-          <Loader />
-        ) : (
-          <div>
-            <div className="job-container">
-              {data.map(d => (
-                <Job key={d.objectID} job={d} />
-              ))}
-            </div>
-            {techSelected >= 0 && (
-              <Pagination
-                page={page}
-                numberPages={numberPages}
-                onChangePage={onChangePage}
-                onPrevPage={onPrevPage}
-                onNextPage={onNextPage}
-              />
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            key={'home'}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <NewTechnologies
+              techSelected={techSelected}
+              onChangeTech={onChangeTech}
+            />
+            {loading ? (
+              <Loader />
+            ) : (
+              <div>
+                <div className="job-container">
+                  {data.map(d => (
+                    <Job key={d.objectID} job={d} />
+                  ))}
+                </div>
+                {techSelected >= 0 && (
+                  <Pagination
+                    page={page}
+                    numberPages={numberPages}
+                    onChangePage={onChangePage}
+                    onPrevPage={onPrevPage}
+                    onNextPage={onNextPage}
+                  />
+                )}
+              </div>
             )}
-          </div>
-        )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
