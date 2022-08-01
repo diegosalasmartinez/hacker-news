@@ -5,18 +5,19 @@ import NewTechnologies from '../components/NewTechnologies'
 import Job from '../components/Job'
 import Pagination from '../components/Pagination'
 import Loader from '../components/Loader'
+import { Job as JobType } from '../types'
 
 const techs = ['angular', 'reactjs', 'vuejs']
 
 const Home = () => {
   const techStored = localStorage.getItem('tech')
-  const [techSelected, setTechSelected] = useState(
+  const [techSelected, setTechSelected] = useState<number>(
     techStored ? parseInt(techStored) : -1
   )
-  const [loading, setLoading] = useState(false)
-  const [page, setPage] = useState(0)
-  const [data, setData] = useState([])
-  const [numberPages, setNumberPages] = useState(0)
+  const [data, setData] = useState<JobType[]>([])
+  const [page, setPage] = useState<number>(0)
+  const [numberPages, setNumberPages] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,8 +27,8 @@ const Home = () => {
         `https://hn.algolia.com/api/v1/search_by_date?query=${tech}&page=${page}`
       )
       const data = response.data.hits
-        .filter(d => d.author && d.story_title && d.story_url && d.created_at)
-        .map(d => ({
+        .filter((d : JobType) => d.author && d.story_title && d.story_url && d.created_at)
+        .map((d : JobType) => ({
           objectID: d.objectID,
           author: d.author,
           story_title: d.story_title,
@@ -44,12 +45,13 @@ const Home = () => {
     }
   }, [techSelected, page])
 
-  const onChangeTech = tech => {
-    localStorage.setItem('tech', tech)
+  const onChangeTech = (tech : number) => {
+    localStorage.setItem('tech', tech.toString())
+    setPage(0)
     setTechSelected(tech)
   }
 
-  const onChangePage = number => {
+  const onChangePage = (number : number) => {
     setPage(number - 1)
   }
 

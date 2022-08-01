@@ -4,12 +4,17 @@ import angular from '../assets/angular.png'
 import react from '../assets/react.png'
 import vue from '../assets/vue.png'
 
-const NewTechnologies = props => {
+interface NewTechonologiesProps {
+  techSelected: number,
+  onChangeTech: (number : number) => void
+}
+
+const NewTechnologies = (props : NewTechonologiesProps) => {
   const { techSelected } = props
 
   return (
     <div className="select-box">
-      <div className="select-box__current" tabIndex="1">
+      <div className="select-box__current" tabIndex={1}>
         <div className="select-box__value">
           <input
             className="select-box__input"
@@ -40,7 +45,7 @@ const NewTechnologies = props => {
             value="2"
             checked={techSelected === 1}
             readOnly
-            />
+          />
           <p className="select-box__input-text">Reactjs</p>
         </div>
         <div className="select-box__value">
@@ -51,7 +56,7 @@ const NewTechnologies = props => {
             value="3"
             checked={techSelected === 2}
             readOnly
-            />
+          />
           <p className="select-box__input-text">Vuejs</p>
         </div>
         <img
@@ -63,11 +68,12 @@ const NewTechnologies = props => {
       </div>
       <ul className="select-box__list">
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.7 }}>
-          <li onClick={e => props.onChangeTech(parseInt(e.target.htmlFor))}>
+          <li onClick={() => props.onChangeTech(0)}>
+            {/* <li onClick={e => props.onChangeTech(parseInt(e.target.htmlFor))}> */}
             <label
               className="select-box__option"
               htmlFor="0"
-              aria-hidden="aria-hidden"
+              // aria-hidden="aria-hidden"
             >
               <img src={angular} alt="Angular" height="20px" width="20px" />
               Angular
@@ -75,11 +81,12 @@ const NewTechnologies = props => {
           </li>
         </motion.div>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.7 }}>
-          <li onClick={e => props.onChangeTech(parseInt(e.target.htmlFor))}>
+          <li onClick={() => props.onChangeTech(1)}>
+            {/* <li onClick={e => props.onChangeTech(parseInt(e.target.htmlFor))}> */}
             <label
               className="select-box__option"
               htmlFor="1"
-              aria-hidden="aria-hidden"
+              // aria-hidden="aria-hidden"
             >
               <img src={react} alt="React" height="20px" width="20px" />
               Reactjs
@@ -87,11 +94,11 @@ const NewTechnologies = props => {
           </li>
         </motion.div>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.7 }}>
-          <li onClick={e => props.onChangeTech(parseInt(e.target.htmlFor))}>
+          <li onClick={() => props.onChangeTech(2)}>
             <label
               className="select-box__option"
               htmlFor="2"
-              aria-hidden="aria-hidden"
+              // aria-hidden="aria-hidden"
             >
               <img src={vue} alt="Vue" height="20px" width="20px" />
               Vuejs
@@ -101,11 +108,6 @@ const NewTechnologies = props => {
       </ul>
     </div>
   )
-}
-
-NewTechnologies.propTypes = {
-  techSelected: PropTypes.number.isRequired,
-  onChangeTech: PropTypes.func.isRequired
 }
 
 export default NewTechnologies

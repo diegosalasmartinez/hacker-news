@@ -1,11 +1,9 @@
-import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import {
   expect,
   jest,
   test,
   beforeEach,
-  afterEach,
   describe
 } from '@jest/globals'
 import { fireEvent, render } from '@testing-library/react'
@@ -23,15 +21,9 @@ describe('<Job />', () => {
     ).toISOString()
   }
   let component
-  let windowSpy
 
   beforeEach(() => {
     component = render(<Job job={job} />)
-    windowSpy = jest.spyOn(global, 'window', 'get')
-  })
-
-  afterEach(() => {
-    windowSpy.mockRestore()
   })
 
   test('renders content', () => {
@@ -50,12 +42,16 @@ describe('<Job />', () => {
   })
 
   test('navigate to story_url when clicking the row', () => {
+    const windowSpy = jest.spyOn(global, 'window', 'get')
+
     windowSpy.mockImplementation(() => ({
       location: {
         origin: job.story_url
       }
     }))
     expect(window.location.origin).toEqual(job.story_url)
+    
+    windowSpy.mockRestore()
   })
 
   test('job is not marked as fav', () => {

@@ -1,17 +1,22 @@
-import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import favorite from '../assets/favorite.svg'
 import my_favorite from '../assets/my-favorite.svg'
 import time from '../assets/time.svg'
 import { time_ago } from '../utils'
+import { Job as JobType } from '../types'
 
-const Job = props => {
+interface JobProps {
+  job: JobType
+}
+
+const Job = (props: JobProps) => {
   const { job } = props
   const timeAgo = time_ago(job.created_at)
-  const favJobs = JSON.parse(localStorage.getItem('favJobs')) || []
-  const [isFav, setIsFav] = useState(
-    favJobs.some(j => j.objectID === job.objectID)
+  const storage = localStorage.getItem('favJobs')
+  const favJobs = storage ? JSON.parse(storage) : []
+  const [isFav, setIsFav] = useState<boolean>(
+    favJobs.some((j: JobType) => j.objectID === job.objectID)
   )
 
   const onSeeJob = () => {
@@ -27,15 +32,17 @@ const Job = props => {
   }
 
   const onFavJob = () => {
-    const favJobs = JSON.parse(localStorage.getItem('favJobs')) || []
+    const storage = localStorage.getItem('favJobs')
+    const favJobs = storage ? JSON.parse(storage) : []
     favJobs.push(job)
     localStorage.setItem('favJobs', JSON.stringify(favJobs))
     setIsFav(true)
   }
 
   const onUnfavJov = () => {
-    const favJobs = JSON.parse(localStorage.getItem('favJobs')) || []
-    const index = favJobs.findIndex(j => j.objectID === job.objectID)
+    const storage = localStorage.getItem('favJobs')
+    const favJobs = storage ? JSON.parse(storage) : []
+    const index = favJobs.findIndex((j: JobType) => j.objectID === job.objectID)
     if (index > -1) {
       favJobs.splice(index, 1)
     }
@@ -65,16 +72,6 @@ const Job = props => {
       </div>
     </div>
   )
-}
-
-Job.propTypes = {
-  job: PropTypes.shape({
-    objectID: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    story_title: PropTypes.string.isRequired,
-    story_url: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired
-  })
 }
 
 export default Job

@@ -1,4 +1,3 @@
-import React from 'react'
 import hackerNews from '../assets/hacker-news.svg'
 
 const Header = () => {

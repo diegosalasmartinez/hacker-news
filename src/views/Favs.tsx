@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Job from '../components/Job'
 import Pagination from '../components/Pagination'
+import { Job as JobType } from '../types'
 import favorite from '../assets/my-favorite.svg'
 
 const Favs = () => {
-  const localStorageJobs = JSON.parse(localStorage.getItem('favJobs')) || []
-  const favJobs = localStorageJobs.sort(function (a, b) {
-    return new Date(b.created_at) - new Date(a.created_at)
+  const storage =  localStorage.getItem('favJobs')
+  const localStorageJobs = storage ? JSON.parse(storage) : []
+  const favJobs = localStorageJobs.sort(function (a : JobType, b : JobType) {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   })
-  console.log(favJobs)
-  const [page, setPage] = useState(0)
-  const [data, setData] = useState([])
+  const [data, setData] = useState<JobType[]>([])
+  const [page, setPage] = useState<number>(0)
   const itemsPerPage = 20
-  const [numberPages, setNumberPages] = useState(
+  const [numberPages, setNumberPages] = useState<number>(
     Math.ceil(favJobs.length / itemsPerPage)
   )
 
@@ -23,7 +24,7 @@ const Favs = () => {
     setData(jobs)
   }, [page])
 
-  const onChangePage = number => {
+  const onChangePage = (number : number) => {
     setPage(number - 1)
   }
 

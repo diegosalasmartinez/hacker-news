@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+interface PaginationProps {
+  page: number,
+  numberPages: number,
+  onChangePage: (number : number) => void,
+  onPrevPage: () => void,
+  onNextPage: () => void
+}
 
-const Pagination = props => {
+const Pagination = ( props : PaginationProps) => {
   const { page, numberPages = 50 } = props
 
   const generatePageNumber = () => {
@@ -65,7 +70,7 @@ const Pagination = props => {
     return pages
   }
 
-  const generatePageItem = number => {
+  const generatePageItem = (number : number) => {
     return (
       <li
         key={number}
@@ -108,13 +113,6 @@ const Pagination = props => {
       </li>
     </ul>
   )
-}
-
-Pagination.propTypes = {
-  page: PropTypes.number.isRequired,
-  numberPages: PropTypes.number.isRequired,
-  onPrevPage: PropTypes.func.isRequired,
-  onNextPage: PropTypes.func.isRequired
 }
 
 export default Pagination

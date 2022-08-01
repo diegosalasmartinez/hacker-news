@@ -8,11 +8,11 @@ import Pages from './components/Pages'
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Pages/>
+      <Header />
+      <Pages />
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='favs' element={<Favs/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="favs" element={<Favs />} />
       </Routes>
     </div>
   )

@@ -1,7 +1,6 @@
-import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { expect, test, jest, describe, afterEach } from '@jest/globals'
-import { fireEvent, prettyDOM, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import Pagination from './Pagination'
 
 describe('<Pagination />', () => {
@@ -59,7 +58,7 @@ describe('<Pagination />', () => {
   })
 
   test('render page buttons when selected page is at the middle', () => {
-    page = parseInt(numberPages / 2)
+    page = Math.floor(numberPages / 2)
     const component = render(
       <Pagination
         page={page}
