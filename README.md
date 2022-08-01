@@ -3,6 +3,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 You can visit the page [here](https://diego-salas-reign.netlify.app).
 
+![App thumbnail](./doc/thumb.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
