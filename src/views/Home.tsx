@@ -27,8 +27,11 @@ const Home = () => {
         `https://hn.algolia.com/api/v1/search_by_date?query=${tech}&page=${page}`
       )
       const data = response.data.hits
-        .filter((d : JobType) => d.author && d.story_title && d.story_url && d.created_at)
-        .map((d : JobType) => ({
+        .filter(
+          (d: JobType) =>
+            d.author && d.story_title && d.story_url && d.created_at
+        )
+        .map((d: JobType) => ({
           objectID: d.objectID,
           author: d.author,
           story_title: d.story_title,
@@ -45,13 +48,13 @@ const Home = () => {
     }
   }, [techSelected, page])
 
-  const onChangeTech = (tech : number) => {
+  const onChangeTech = (tech: number) => {
     localStorage.setItem('tech', tech.toString())
     setPage(0)
     setTechSelected(tech)
   }
 
-  const onChangePage = (number : number) => {
+  const onChangePage = (number: number) => {
     setPage(number - 1)
   }
 
